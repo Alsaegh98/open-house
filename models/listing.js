@@ -1,6 +1,4 @@
-// models/listing.js
-
-const mongoose = require('mongoose');
+const mongoose = require('mongoose')
 
 const listingSchema = new mongoose.Schema({
   streetAddress: {
@@ -24,10 +22,9 @@ const listingSchema = new mongoose.Schema({
   owner: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
-  },
-});
+  }
+})
 
-// ... listingSchema located above
-const Listing = mongoose.model('Listing', listingSchema);
+const Listing = mongoose.model('Listing', listingSchema)
 
-module.exports = Listing;
+module.exports = Listing
