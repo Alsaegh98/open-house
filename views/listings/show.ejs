@@ -7,36 +7,25 @@
 </head>
 <body>
     <%- include('../partials/_navbar.ejs') %>
-    <div class="profile-container">
-      <h1>Profile</h1>
-      <p>
-        You have 
-        <%= myListings.length %> 
-        <%= myListings.length===1 ? 'Listing' : 'Listings' %>
-      </p>
-      <div class="profile-card-container">
-        <% myListings.forEach((listing)=> { %>
-        <a href="/listings/<%= listing._id %>">
-          <h4><%= listing.city %> Listing</h4>
-          <p>Owned by <%= listing.owner.username %></p>
-        </a>
-        <% }) %>
-      </div>
-  
-      <div class="profile-favorites-container">
-        <p>
-          You Have <%= myFavoriteListings.length %> 
-          <%= myFavoriteListings.length === 1 ? 'Favorite' : 'Favorites' %>
-        </p>
-        <div class="profile-card-container">
-          <% myFavoriteListings.forEach((listing)=> { %>
-          <a href="/listings/<%= listing._id %>">
-            <h4><%= listing.city %> Listing</h4>
-            <p>Owned by <%= listing.owner.username %></p>
-          </a>
-          <% }) %>
-        </div>
-      </div>
-    </div>
+    <h1>A listing in <%= listing.city %></h1>
+
+    <h2>Details</h2>
+    <p>House Size: <%= listing.size %> sq ft</p>
+    <p>Price: $<%= listing.price %></p>
+    <p>Street address: <%= listing.streetAddress %></p>
+
+    <!-- views/listings/show.ejs -->
+
+  <h2>Owner</h2>
+  <% if (listing.owner._id.equals(user._id)) { %>
+    <p>You own this!</p>
+    <a href="/listings/<%= listing._id %>/edit">Edit this listing</a>
+    <form action="/listings/<%= listing._id %>?_method=DELETE" method="POST">
+      <button type="submit">Delete this listing</button>
+    </form>
+  <% } else { %>
+    <p>You don't own this, <%= listing.owner.username %> does!</p>
+  <% } %>
+
   </body>
 </html>
